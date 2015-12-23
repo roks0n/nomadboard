@@ -1,0 +1,10 @@
+// @import "libs/bourbon/bourbon";
+// @import "libs/neat/neat";
+
+.header {
+    @include outer-container(1080px);
+
+    .header__title {
+        text-align: center;
+    }
+}

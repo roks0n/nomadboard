@@ -1,0 +1,24 @@
+{
+  "name": "nomadboard",
+  "version": "0.0.1",
+  "description": "Job board for digital nomads",
+  "main": "Gruntfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Rok Haluzan (roks0n)",
+  "license": "MIT",
+  "scripts": {
+    "grunt": "grunt",
+    "build": "grunt build"
+  },
+  "dependencies": {
+    "grunt": "^0.4.5",
+    "grunt-cli": "^0.1.13",
+    "grunt-contrib-concat": "^0.5.1",
+    "grunt-contrib-jshint": "^0.11.3",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-sass": "^1.1.0",
+    "jshint": "^2.8.0"
+  }
+}

@@ -1,0 +1,4 @@
+flake8==2.3.0
+flake8-import-order==0.5.3
+pep8==1.5.7
+pylint==1.4.1

@@ -1,0 +1,11 @@
+*.sqlite3
+*.pyc
+*.log
+*.css.map
+*.comp.*
+.idea
+
+!.circle
+!.gitignore
+media/
+node_modules/

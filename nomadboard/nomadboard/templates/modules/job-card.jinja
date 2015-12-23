@@ -1,0 +1,36 @@
+<div class="job-card" itemscope itemtype ="http://schema.org/JobPosting">
+    <div class="job-card-inner">
+
+        <div class="job-card__company_logo">
+            {% if job.company.logo %}
+                <img src="/media/{{ job.company.logo }}" alt="">
+            {% else %}
+                 <img src="http://placehold.it/85x85?text=n/a" alt="">
+            {% endif %}
+        </div>
+
+        <div class="job-card__description">
+            <div class="job-card__role">
+                <a href="{{ job.link }}" itemprop="title">{{ job.role }}</a>
+            </div>
+
+            <div class="job-card__company_name">
+                <span itemprop="hiringOrganization">{{ job.company.name }}</span>
+            </div>
+
+            <ul class="job-card__tags" itemprop="skills">
+                {% for tag in job.tags.all() %}
+                    <li class="job-card__tags__tag">{{ tag }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="job-card__meta"></div>
+
+        <div class="job-card__date_published_view">
+            <small>Published</small>
+            <span itemprop="datePosted">{{ job.date_published|date('d.m.Y') }}</span>
+        </div>
+
+    </div>
+</div>
