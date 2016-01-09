@@ -1,35 +1,36 @@
 nomad-web:
-    container_name: nomad-web
-    build: .
-    volumes:
-        - .:/home/nomadboard/code
-    command: django-admin runserver 0.0.0.0:8000
-    links:
-        - nomad-db
-    ports:
-        - "8000:8000"
-    environment:
-        - NOMADBOARD_DEBUG=1
-        - DJANGO_SETTINGS_MODULE=nomadboard.settings
+  container_name: nomad-web
+  build: .
+  volumes:
+    - .:/home/nomadboard/code
+  command: django-admin runserver 0.0.0.0:8000
+  links:
+    - nomad-db
+  ports:
+    - "8000:8000"
+  environment:
+    - NOMADBOARD_DEBUG=1
+    - NOMADBOARD_DJANGO_SETTINGS_MODULE=nomadboard.settings
+    - NOMADBOARD_SECRET_KEY=1337+dev+secret+key
 
 nomad-db:
-    container_name: nomad-postgres
-    image: postgres
-    volumes_from:
-        - nomad-data
+  container_name: nomad-postgres
+  image: postgres
+  volumes_from:
+    - nomad-data
 
 nomad-grunt:
-   container_name: nomad-grunt
-   build: .
-   dockerfile: docker/grunt/Dockerfile
-   volumes:
-       - ./nomadboard/nomadboard/static:/home/nomadboard/code/nomadboard/nomadboard/static
-       - ./Gruntfile.js:/home/nomadboard/code/Gruntfile.js
-       - ./package.json:/home/nomadboard/code/package.json
-       - ./.jshintrc:/home/nomadboard/code/.jshintrc
+  container_name: nomad-grunt
+  build: .
+  dockerfile: docker/grunt/Dockerfile
+  volumes:
+    - ./nomadboard/nomadboard/static:/home/nomadboard/code/nomadboard/nomadboard/static
+    - ./Gruntfile.js:/home/nomadboard/code/Gruntfile.js
+    - ./package.json:/home/nomadboard/code/package.json
+    - ./.jshintrc:/home/nomadboard/code/.jshintrc
 
 nomad-data:
-    container_name: nomad-data
-    image: postgres
-    volumes:
-        - /var/lib/postgresql
+  container_name: nomad-data
+  image: postgres
+  volumes:
+    - /var/lib/postgresql

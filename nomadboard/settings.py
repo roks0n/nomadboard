@@ -22,13 +22,17 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'sicret_key_goes_here'  # TODO: change with env variable
+SECRET_KEY = os.environ.get('NOMADBOARD_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True  # TODO: change with env variable
+DEBUG = bool(os.environ.get('NOMADBOARD_DEBUG'))
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = [
+    'www.nomadboard.co',
+    'nomadboard.co',
+    '192.168.99.100',
+    'localhost',
+]
 
 # Application definition
 

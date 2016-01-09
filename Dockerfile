@@ -1,7 +1,7 @@
 FROM python:3.5
 
 ENV PYTHONPATH=/home/nomadboard/code
-ENV DJANGO_SETTINGS_MODULE nomadboard.settings
+ENV NOMADBOARD_DJANGO_SETTINGS_MODULE nomadboard.settings
 
 RUN apt-get update && \
     apt-get install -y libxml2 libpq5 libevent-2.0-5 libxslt1.1 python3-pip python3.4-dev && \
