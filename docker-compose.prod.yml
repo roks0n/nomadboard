@@ -1,5 +1,5 @@
 nomad-web:
-  restart: always
+  restart: "always"
   command: django-admin runserver 0.0.0.0:80
   ports:
     - "80:80"
@@ -8,10 +8,10 @@ nomad-web:
     - NOMADBOARD_SECRET_KEY  # if not defined, it gets the value from hosts environment
 
 nomad-db:
-  restart: always
+  restart: "always"
 
 nomad-grunt:
-  restart: always
+  restart: "always"
 
 nomad-data:
-  restart: always
+  restart: "no"

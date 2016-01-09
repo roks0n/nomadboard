@@ -9,6 +9,7 @@ help:
 
 build:
 	docker-compose build
+	docker-compose build nomad-data
 
 runserver:
 	@echo "==="
