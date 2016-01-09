@@ -22,10 +22,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'pAq0#9018[h2r--j[)I!_}RT-]0[132ityqi30][oko?!+_'
+SECRET_KEY = 'sicret_key_goes_here'  # TODO: change with env variable
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = True  # TODO: change with env variable
 
 ALLOWED_HOSTS = []
 
@@ -108,17 +108,6 @@ TEMPLATES = [
 
 
 WSGI_APPLICATION = 'nomadboard.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/1.9/ref/settings/#databases
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
 
 # Database
 DB_NAME = os.environ.get('NOMADBOARD_DB_NAME') or 'postgres'
