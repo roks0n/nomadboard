@@ -18,6 +18,9 @@ runserver:
 	@echo "==="
 	docker-compose up
 
+run-production:
+	docker-compose -f docker-compose.yml -f docker-compose.prod.yml up
+
 django:
 	docker-compose run $(NAME) django-admin ${DJANGO_CMD}
 
