@@ -8,9 +8,7 @@ help:
 # start: build wakeup-database migrate collectstatic
 
 build:
-	docker-compose build $(NAME)
-	docker-compose build nomad-db
-	docker-compose build nomad-grunt
+	docker-compose build
 
 runserver:
 	@echo "==="

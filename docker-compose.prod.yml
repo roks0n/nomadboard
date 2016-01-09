@@ -1,8 +1,17 @@
 nomad-web:
+  restart: always
   command: django-admin runserver 0.0.0.0:80
   ports:
     - "80:80"
   environment:
-    - NOMADBOARD_DEBUG=0
-    - NOMADBOARD_DJANGO_SETTINGS_MODULE=nomadboard.settings
+    - NOMADBOARD_DEBUG=False
     - NOMADBOARD_SECRET_KEY  # if not defined, it gets the value from hosts environment
+
+nomad-db:
+  restart: always
+
+nomad-grunt:
+  restart: always
+
+nomad-data:
+  restart: always

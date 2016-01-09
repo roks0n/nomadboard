@@ -9,8 +9,8 @@ nomad-web:
   ports:
     - "8000:8000"
   environment:
-    - NOMADBOARD_DEBUG=1
-    - NOMADBOARD_DJANGO_SETTINGS_MODULE=nomadboard.settings
+    - NOMADBOARD_DEBUG=True
+    - DJANGO_SETTINGS_MODULE=nomadboard.settings
     - NOMADBOARD_SECRET_KEY=1337+dev+secret+key
 
 nomad-db:
