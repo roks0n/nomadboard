@@ -1,5 +1,6 @@
 from django.apps import AppConfig
 
 
-class JobsConfig(AppConfig):
-    name = 'jobs'
+class ScraperConfig(AppConfig):
+    name = 'scraper'
+    verbose_name = 'Scraper'
