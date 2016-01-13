@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.core.urlresolvers import reverse
 
 from nomadboard.nomadboard.company.models import Company
 from nomadboard.nomadboard.scraper.models import Scraper
@@ -16,7 +17,7 @@ class Job(models.Model):
     date_added = models.DateTimeField(default=timezone.now)
     date_published = models.DateTimeField(default=timezone.now)
     description = models.CharField(max_length=10000)
-    tags = models.ManyToManyField('Tag', related_name='tags')
+    tags = models.ManyToManyField('Tag', related_name='jobs', related_query_name='tags')
     link = models.CharField(max_length=150)
     via_source = models.ForeignKey(Scraper, on_delete=models.CASCADE, blank=True, null=True)
 
@@ -36,10 +37,13 @@ class Tag(models.Model):
     Tag model
 
     """
-    name = models.CharField(max_length=80)
+    name = models.CharField(max_length=80, unique=True)
 
     def __str__(self):
         return self.name
 
     def __repr__(self):
         return '<Tag {name}>'.format(name=self.name)
+
+    def get_absolute_url(self):
+        return reverse('tag', kwargs={'tag_slug': self.name})

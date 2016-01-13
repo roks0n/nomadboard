@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from nomadboard.nomadboard.job.views import JobBoard
+from nomadboard.nomadboard.job.views import JobBoard, JobFilter
 from django.conf.urls.static import static
 
 from nomadboard.settings import MEDIA_URL, MEDIA_ROOT, DEBUG
@@ -25,6 +25,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
 
     url(r'^$', JobBoard.as_view(), name='home'),
+    url(r'^job/(?P<tag_slug>[\w-]+)$', JobFilter.as_view(), name='tag'),
 
 ]
 if DEBUG:

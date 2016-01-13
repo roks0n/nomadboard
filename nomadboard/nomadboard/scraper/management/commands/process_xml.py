@@ -52,7 +52,6 @@ class Command(BaseCommand):
         if source_id:
             for source in source_id.split(','):
                 try:
-                    print('trying for source:', source)
                     src = Source.objects.get(pk=int(source))
                 except Source.DoesNotExist:
                     src = None

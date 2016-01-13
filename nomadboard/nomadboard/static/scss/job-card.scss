@@ -16,7 +16,6 @@
     margin-bottom: 1em;
     width: 100%;
     position: relative;
-    cursor: pointer;
 
     &__company_logo {
         @include span-columns(1.5 of 12);

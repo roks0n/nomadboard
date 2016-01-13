@@ -19,3 +19,11 @@ TODO: gets below error, it gets fixed after a re-run, fix it so it works out of 
 ### Development
 4. If you do any changes to models, you must create migrations
 `make migrations`
+
+
+
+### PRODUCTION
+
+1. Start Scheduler
+`nohup make django DJANGO_CMD='process_xml --source_id=1,2' >> scheduler.log &`
+This will start the scheduler in the background an log outputs to the `scheduler.log` file.
