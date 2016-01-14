@@ -1,6 +1,6 @@
+from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils import timezone
-from django.core.urlresolvers import reverse
 
 from nomadboard.nomadboard.company.models import Company
 from nomadboard.nomadboard.scraper.models import Scraper

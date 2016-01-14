@@ -45,7 +45,6 @@ class Source(models.Model):
                                 default=CATEGORY_PROGRAMMING,
                                 blank=True, max_length=11)
 
-
     def __str__(self):
         return self.url
 

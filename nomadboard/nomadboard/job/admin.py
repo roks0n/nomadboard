@@ -4,8 +4,8 @@ from nomadboard.nomadboard.job.models import Job, Tag
 
 
 class JobAdmin(admin.ModelAdmin):
-     model = Job
-     filter_horizontal = ('tags',)
+    model = Job
+    filter_horizontal = ('tags',)
 
 
 admin.site.register(Job, JobAdmin)

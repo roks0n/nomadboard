@@ -1,9 +1,8 @@
+
 import os
+import xml.etree.ElementTree as ET
 from datetime import datetime
 from urllib.parse import urlparse
-
-import requests
-import xml.etree.ElementTree as ET
 
 from django.core.files import File
 from django.core.files.temp import NamedTemporaryFile
@@ -13,6 +12,8 @@ from django.utils.text import slugify
 from nomadboard.nomadboard.company.models import Company
 from nomadboard.nomadboard.job.models import Job, Tag
 from nomadboard.nomadboard.job.utils import extract_and_normalize_tags
+
+import requests
 
 
 def scrape(source):
@@ -47,8 +48,8 @@ def scrape(source):
 def scraped_job(job_dict):
     company_name = job_dict['company'].strip()
     company, created_company = Company.objects.get_or_create(
-            slug=slugify(company_name),
-            name=company_name,
+        slug=slugify(company_name),
+        name=company_name,
     )
 
     if created_company:
@@ -58,7 +59,7 @@ def scraped_job(job_dict):
     source_category = job_dict['source_category']
     job_dict.pop('source_category')
     job_dict.pop('logo')
-    job_dict.update({ 'company': company })
+    job_dict.update({'company': company})
     job, created_job = Job.objects.update_or_create(**job_dict)
     if created_job:
         tag, _ = Tag.objects.get_or_create(name=source_category)
