@@ -14,24 +14,5 @@ nomad-web:
     - NOMADBOARD_SECRET_KEY=1337+dev+secret+key
 
 nomad-db:
-  container_name: nomad-postgres
+  container_name: nomad-db
   image: postgres
-  volumes_from:
-    - nomad-data
-
-nomad-grunt:
-  container_name: nomad-grunt
-  build: .
-  dockerfile: docker/grunt/Dockerfile
-  volumes:
-    - ./nomadboard/nomadboard/static:/home/nomadboard/code/nomadboard/nomadboard/static
-    - ./Gruntfile.js:/home/nomadboard/code/Gruntfile.js
-    - ./package.json:/home/nomadboard/code/package.json
-    - ./.jshintrc:/home/nomadboard/code/.jshintrc
-
-nomad-data:
-  container_name: nomad-data
-  image: postgres
-  volumes:
-    - /var/lib/postgresql
-  command: "true"
