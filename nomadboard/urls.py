@@ -15,11 +15,11 @@ Including another URLconf
     3. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
 from django.conf.urls import url
-from django.contrib import admin
-from nomadboard.nomadboard.job.views import JobBoard, JobFilter
 from django.conf.urls.static import static
+from django.contrib import admin
 
-from nomadboard.settings import MEDIA_URL, MEDIA_ROOT, DEBUG
+from nomadboard.nomadboard.job.views import JobBoard, JobFilter
+from nomadboard.settings import DEBUG, MEDIA_ROOT, MEDIA_URL
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -30,5 +30,6 @@ urlpatterns = [
     url(r'^job/(?P<tag_slug>[\w-]+)$', JobFilter.as_view(), name='tag'),
 
 ]
+
 if DEBUG:
     urlpatterns += static(MEDIA_URL, document_root=MEDIA_ROOT)

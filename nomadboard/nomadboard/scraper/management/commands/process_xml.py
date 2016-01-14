@@ -20,15 +20,9 @@ class Command(BaseCommand):
                             default=None,
                             help=('You must specify an id of the source you want to fetch and'
                                   'update otherwise we will update all sources.'))
-        parser.add_argument('--no_db',
-                            default=True,
-                            help=('Set to False if you want to update the database with new'
-                                  'entries, otherwise use True, which will just output the feed.'
-                                  'By default it does not update the database.'))
 
     def handle(self, *args, **options):
         source_id = options['source_id']
-        no_db = options['no_db']
 
         # start BackgroundScheduler and add an interval job that gets ran every 30 minutes
         scheduler = BackgroundScheduler()
