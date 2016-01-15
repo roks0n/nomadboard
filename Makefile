@@ -12,6 +12,9 @@ help:
 bootstrap:
 	build wakeup-database migrate
 
+build:
+	docker-compose build
+
 runserver:
 	@echo "==="
 	@echo "Nomadboard is now running on $(DOCKER_IP):8
