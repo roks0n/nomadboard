@@ -10,7 +10,9 @@ help:
 	# django-shell - runs django's shell
 
 bootstrap:
-	build wakeup-database migrate
+	make build
+	make wakeup-database
+	make migrate
 
 build:
 	docker-compose build
