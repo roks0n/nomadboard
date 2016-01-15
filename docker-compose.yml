@@ -16,3 +16,16 @@ nomad-web:
 nomad-db:
   container_name: nomad-db
   image: postgres
+  environment:
+    POSTGRES_PASSWORD: docker
+    POSTGRES_USER: docker
+
+nomad-grunt:
+  container_name: nomad-grunt
+  build: .
+  dockerfile: docker/grunt/Dockerfile
+  volumes:
+    - ./nomadboard/nomadboard/static:/home/nomadboard/code/nomadboard/nomadboard/static
+    - ./Gruntfile.js:/home/nomadboard/code/Gruntfile.js
+    - ./package.json:/home/nomadboard/code/package.json
+    - ./.jshintrc:/home/nomadboard/code/.jshintrc
