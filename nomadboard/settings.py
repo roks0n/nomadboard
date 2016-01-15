@@ -113,8 +113,8 @@ WSGI_APPLICATION = 'nomadboard.wsgi.application'
 
 # Database
 DB_NAME = os.environ.get('NOMADBOARD_DB_NAME') or 'postgres'
-DB_USER = os.environ.get('NOMADBOARD_DB_USER') or 'postgres'
-DB_PASSWORD = os.environ.get('NOMADBOARD_DB_PASSWORD') or ''
+DB_USER = os.environ.get('NOMADBOARD_DB_USER') or 'docker'
+DB_PASSWORD = os.environ.get('NOMADBOARD_DB_PASSWORD') or 'docker'
 DB_HOST = os.environ.get('NOMADBOARD_DB_HOST') or 'nomad-db'
 DB_PORT = int(os.environ.get('NOMADBOARD_DB_PORT') or '5432')
 
