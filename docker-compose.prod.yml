@@ -9,9 +9,9 @@ nomad-web:
 
 nomad-db:
   restart: "always"
+  volumes:
+    - /docker/nomad-postgres/data:/var/lib/postgresql/data
+    - /docker/logs/nomad-postgresql:/var/log/postgresql
 
 nomad-grunt:
   restart: "always"
-
-nomad-data:
-  restart: "no"
