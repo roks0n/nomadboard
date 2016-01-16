@@ -12,14 +12,13 @@ help:
 bootstrap:
 	make build
 	make wakeup-database
-	make migrate
 
 build:
 	docker-compose build
 
 runserver:
 	@echo "==="
-	@echo "Nomadboard is now running on $(DOCKER_IP):8
+	@echo "Nomadboard is now running on $(DOCKER_IP):8000"
 	@echo "==="
 	docker-compose up
 
@@ -54,4 +53,7 @@ clean-pyc:
 	find . -name "*.pyc" -type f -delete
 
 run-production:
+	@echo "==="
+	@echo "Run production!"
+	@echo "==="
 	docker-compose -f docker-compose.yml -f docker-compose.prod.yml up

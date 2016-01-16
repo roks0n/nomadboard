@@ -12,6 +12,3 @@ nomad-db:
   volumes:
     - /docker/nomad-postgres/data:/var/lib/postgresql/data
     - /docker/logs/nomad-postgresql:/var/log/postgresql
-
-nomad-grunt:
-  restart: "always"
