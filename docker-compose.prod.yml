@@ -1,7 +1,7 @@
 nomad-web:
   restart: "always"
   environment:
-    - NOMADBOARD_DEBUG=False
+    - NOMADBOARD_DEBUG=0
     - NOMADBOARD_SECRET_KEY  # if not defined, it gets the value from hosts environment
 
 nomad-db:

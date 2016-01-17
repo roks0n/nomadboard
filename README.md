@@ -6,11 +6,11 @@
 `make bootstrap`
 `make migrate`
 
-2. Run the whole thing
-`make runserver`
-
-3. Create superuser
+2. Create superuser
 `make superuser`
+
+3. Run the whole thing
+`make runserver`
 
 ### Development
 1. If you do any changes to models, you must create migrations

@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ.get('NOMADBOARD_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = bool(os.environ.get('NOMADBOARD_DEBUG'))
+DEBUG = bool(int(os.environ.get('NOMADBOARD_DEBUG')))
 
 ALLOWED_HOSTS = [
     'www.nomadboard.co',
@@ -167,11 +167,11 @@ MEDIA_URL = '/media/'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
-
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'nomadboard/nomadboard/static'),
-]
+
+# This is the directory `collectstatic` will create which will contain the 'deployable' static files
+STATIC_ROOT = os.path.abspath('nomadboard/nomadboard/static')
+
 # This defines how the staticfiles app will find files
 # The FileSystemFinder will use the directories defined in STATICFILES_DIRS.
 STATICFILES_FINDERS = (
