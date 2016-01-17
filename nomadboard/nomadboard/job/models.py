@@ -37,7 +37,7 @@ class Tag(models.Model):
     Tag model
 
     """
-    name = models.CharField(max_length=80, unique=True)
+    name = models.SlugField(max_length=80, unique=True)
 
     def __str__(self):
         return self.name
