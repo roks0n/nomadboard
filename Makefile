@@ -21,8 +21,7 @@ runserver:
 	@echo "==="
 	@echo "Nomadboard is now running on $(DOCKER_IP):8000"
 	@echo "==="
-	# docker-compose run nomad-web django-admin runserver 0.0.0.0:8000
-	docker-compose up
+	docker-compose run --service-ports nomad-web
 
 django:
 	docker-compose run $(NAME) django-admin ${DJANGO_CMD}

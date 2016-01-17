@@ -3,26 +3,27 @@ from django.http import HttpResponseRedirect
 from django.views.generic.base import TemplateView
 
 from nomadboard.nomadboard.job.models import Job, Tag
+from nomadboard.nomadboard.utils.pagination import pagination as paginator
 
 
 class JobBoard(TemplateView):
 
     template_name = 'main.jinja'
-    jobs = None
-    filters = None
 
     def get(self, request, **kwargs):
-        jobs = Job.objects.all()
-        self.jobs = jobs.order_by('-date_published') if jobs else []
-        self.filters = Tag.objects.all()
         return super(JobBoard, self).get(request, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super(JobBoard, self).get_context_data(**kwargs)
+        page = self.request.GET.get('page')
+        jobs = Job.objects.all().order_by('-date_published')
+
+        paginated_jobs = paginator(jobs, page, 6)
+        if paginated_jobs:
+            jobs = paginated_jobs
 
         context.update({
-            'jobs': self.jobs,
-            'filters': self.filters,
+            'jobs': jobs,
         })
 
         return context
@@ -31,25 +32,29 @@ class JobBoard(TemplateView):
 class JobFilter(TemplateView):
 
     template_name = 'main.jinja'
-    jobs = None
-    slug = None
 
     def get(self, request, **kwargs):
-        self.slug = kwargs.get('tag_slug')
-        try:
-            jobs = Tag.objects.get(name=self.slug).jobs.all()
-        except Tag.DoesNotExist:
-            return HttpResponseRedirect(reverse('home'))
-        jobs = Tag.objects.get(name=self.slug).jobs.all()
-        self.jobs = jobs.order_by('-date_published') if jobs else []
         return super(JobFilter, self).get(request, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super(JobFilter, self).get_context_data(**kwargs)
+        page = self.request.GET.get('page')
+        slug = kwargs.get('tag_slug')
 
+        try:
+            tag = Tag.objects.get(name=slug)
+        except Tag.DoesNotExist:
+            return HttpResponseRedirect(reverse('home'))
+
+        jobs = Tag.objects.get(name=slug).jobs.order_by('-date_published') if tag else []
+
+        paginated_jobs = paginator(jobs, page, 6)
+
+        if paginated_jobs:
+            jobs = paginated_jobs
         context.update({
-            'jobs': self.jobs,
-            'tag_slug': self.slug,
+            'jobs': jobs,
+            'tag_slug': slug,
         })
 
         return context
