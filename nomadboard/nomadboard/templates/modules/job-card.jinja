@@ -1,17 +1,17 @@
 <div class="job-card" itemscope itemtype ="http://schema.org/JobPosting">
     <div class="job-card-inner">
 
-        <div class="job-card__company_logo">
-            {% if job.company.logo %}
-                <img src="/media/{{ job.company.logo }}" alt="">
-            {% else %}
-                 <img src="http://placehold.it/85x85?text=n/a" alt="">
-            {% endif %}
+        {% if job.company.logo %}
+            {% set logo_url = "/media/" + job.company.logo|string %}
+        {% else %}
+            {% set logo_url="http://placehold.it/85x85?text=n/a" %}
+        {% endif %}
+        <div class="job-card__company_logo" style="background-image: url({{ logo_url }})">
         </div>
 
         <div class="job-card__description">
             <div class="job-card__role">
-                <a href="{{ job.link }}" itemprop="title">{{ job.role }}</a>
+                <a href="{{ job.link }}" itemprop="title" target="_blank">{{ job.role }}</a>
             </div>
 
             <div class="job-card__company_name">

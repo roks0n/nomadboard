@@ -21,6 +21,14 @@
     {% include 'modules/header.jinja' %}
 
     <div class="jobs">
+        <h2 class="jobs__search_title">
+            Remote
+            {% if tag_slug %}
+                <span class="jobs__search_title--term">{{ tag_slug }}</span>
+            {% endif %}
+            jobs
+        </h2>
+
         {% for job in jobs %}
             {% include 'modules/job-card.jinja' %}
         {% endfor %}

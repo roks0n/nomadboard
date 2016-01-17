@@ -28,7 +28,7 @@ urlpatterns = [
     url(r'^$', JobBoard.as_view(), name='home'),
 
     url(r'^job/$', JobFilter.as_view()),
-    url(r'^job/(?P<tag_slug>[\w-]+)$', JobFilter.as_view(), name='tag'),
+    url(r'^remote-(?P<tag_slug>[\w-]+)-jobs$', JobFilter.as_view(), name='tag'),
 
 ]
 
