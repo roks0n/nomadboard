@@ -1,6 +1,20 @@
 .jobs {
     @include outer-container(700px);
     margin-top: 2em;
+
+    &__search_title{
+        font-weight: normal;
+        text-align: center;
+
+        &--term {
+            color: $blue;
+            font-weight: bold;
+            text-transform: uppercase;
+            border-bottom: 4px solid $blue;
+        }
+
+    }
+
 }
 
 .job-card {
@@ -20,9 +34,12 @@
 
     &__company_logo {
         @include span-columns(1.5 of 12);
+        background-size: contain;
         overflow: hidden;
         position: relative;
         height: 69px;
+        background-repeat: no-repeat;
+        background-position: center center;
 
         img {
             position: absolute;
@@ -84,14 +101,15 @@
         list-style: none;
 
         &__tag {
-            background: #428cd1;
-            color: #FFF;
+            background: $blue;
+            color: $white;
             width: auto;
             margin: 0 0.5em 0.5em 0;
-            font-size: 0.7em;
+            font-size: 0.6em;
             padding: 0.3em 0.5em 0.43em;
             display: table;
             border-radius: 0.3em;
+            text-transform: uppercase;
         }
 
     }
