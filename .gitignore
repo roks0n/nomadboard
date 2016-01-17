@@ -7,5 +7,6 @@
 *.DS_Store
 !.circle
 !.gitignore
-media/
-node_modules/
+uploads/
+/node_modules
+nomadboard/nomadboard/static/css

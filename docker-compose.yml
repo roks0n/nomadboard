@@ -20,7 +20,7 @@ nomad-web:
   expose:
     - "8000"
   environment:
-    - NOMADBOARD_DEBUG=True
+    - NOMADBOARD_DEBUG=1
     - DJANGO_SETTINGS_MODULE=nomadboard.settings
     - NOMADBOARD_SECRET_KEY=1337+dev+secret+key
     - PORT=8000

@@ -12,6 +12,7 @@ help:
 bootstrap:
 	make build
 	make wakeup-database
+	make staticfiles
 
 build:
 	docker-compose build
@@ -20,6 +21,7 @@ runserver:
 	@echo "==="
 	@echo "Nomadboard is now running on $(DOCKER_IP):8000"
 	@echo "==="
+	# docker-compose run nomad-web django-admin runserver 0.0.0.0:8000
 	docker-compose up
 
 django:
@@ -56,4 +58,15 @@ run-production:
 	@echo "==="
 	@echo "Run production!"
 	@echo "==="
+	make staticfiles
 	docker-compose -f docker-compose.yml -f docker-compose.prod.yml up
+
+compile-staticfiles:
+	docker-compose run nomad-grunt npm run-script grunt
+
+staticfiles:
+	make compile-staticfiles
+	make collectstatic
+
+grunt-watch:
+	docker-compose run nomad-grunt npm run-script grunt watch
