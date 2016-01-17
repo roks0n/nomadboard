@@ -58,7 +58,6 @@ run-production:
 	@echo "==="
 	@echo "Run production!"
 	@echo "==="
-	make staticfiles
 	docker-compose -f docker-compose.yml -f docker-compose.prod.yml up
 
 compile-staticfiles:
