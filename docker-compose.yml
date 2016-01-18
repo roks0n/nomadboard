@@ -2,23 +2,17 @@ nomad-nginx:
   container_name: nomad-nginx
   build: ./docker/nginx/
   dockerfile: Dockerfile
-  ports:
-    - "8000:8000"
-  volumes_from:
-    - nomad-web
-  links:
-    - nomad-web
 
 nomad-web:
   container_name: nomad-web
   build: .
   volumes:
     - .:/home/nomadboard/code
-  command: ./bin/web
+  command: django-admin runserver 0.0.0.0:8000
+  ports:
+    - "8000:8000"
   links:
     - nomad-db
-  expose:
-    - "8000"
   environment:
     - NOMADBOARD_DEBUG=1
     - DJANGO_SETTINGS_MODULE=nomadboard.settings

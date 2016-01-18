@@ -108,8 +108,8 @@ TEMPLATES = [
     },
 ]
 
-
-WSGI_APPLICATION = 'nomadboard.wsgi.application'
+if not DEBUG:
+    WSGI_APPLICATION = 'nomadboard.wsgi.application'
 
 # Database
 DB_NAME = os.environ.get('NOMADBOARD_DB_NAME') or 'postgres'
@@ -169,8 +169,14 @@ MEDIA_URL = '/media/'
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 STATIC_URL = '/static/'
 
-# This is the directory `collectstatic` will create which will contain the 'deployable' static files
-STATIC_ROOT = os.path.abspath('nomadboard/nomadboard/static')
+if DEBUG:
+    STATICFILES_DIRS = [
+        os.path.join(BASE_DIR, 'nomadboard/nomadboard/static'),
+    ]
+else:
+    # This is the directory `collectstatic` will create which will contain the 'deployable'
+    # static files
+    STATIC_ROOT = os.path.abspath('nomadboard/nomadboard/static')
 
 # This defines how the staticfiles app will find files
 # The FileSystemFinder will use the directories defined in STATICFILES_DIRS.

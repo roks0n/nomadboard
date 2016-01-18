@@ -1,5 +1,16 @@
+nomad-nginx:
+  ports:
+    - "8000:8000"
+  volumes_from:
+    - nomad-web
+  links:
+    - nomad-web
+
 nomad-web:
   restart: "always"
+  command: ./bin/web
+  expose:
+    - "8000"
   environment:
     - NOMADBOARD_DEBUG=0
     - NOMADBOARD_SECRET_KEY  # if not defined, it gets the value from hosts environment

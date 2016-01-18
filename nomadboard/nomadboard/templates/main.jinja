@@ -30,9 +30,19 @@
         </h2>
 
         {% for job in jobs %}
+
+            {% if job.date_published|date('d') == "15" %}
+                <strong>WOOOP!</strong>
+            {% endif %}
+
             {% include 'modules/job-card.jinja' %}
         {% endfor %}
+
     </div>
+
+    {% with pagination=jobs %}
+            {% include 'modules/paginator.jinja' %}
+    {% endwith %}
 
 </body>
 </html>
