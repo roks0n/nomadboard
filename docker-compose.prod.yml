@@ -1,6 +1,7 @@
 nomad-nginx:
+  restart: "always"
   ports:
-    - "8000:8000"
+    - "80:80"
   volumes_from:
     - nomad-web
   links:
@@ -10,7 +11,7 @@ nomad-web:
   restart: "always"
   command: ./bin/web
   expose:
-    - "8000"
+    - "80"
   environment:
     - NOMADBOARD_DEBUG=0
     - NOMADBOARD_SECRET_KEY  # if not defined, it gets the value from hosts environment
@@ -20,8 +21,3 @@ nomad-db:
   volumes:
     - /docker/nomad-postgres/data:/var/lib/postgresql/data
     - /docker/logs/nomad-postgresql:/var/log/postgresql
-
-nomad-nginx:
-  restart: "always"
-  ports:
-    - "80:80"

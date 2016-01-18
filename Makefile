@@ -12,7 +12,6 @@ help:
 bootstrap:
 	make build
 	make wakeup-database
-	make staticfiles
 
 build:
 	docker-compose build
@@ -42,7 +41,7 @@ migrate:
 	docker-compose run $(NAME) django-admin migrate
 
 collectstatic:
-	docker-compose run $(NAME) django-admin collectstatic --noinput
+	docker-compose -f docker-compose.yml -f docker-compose.prod.yml run $(NAME) django-admin collectstatic --noinput
 
 superuser:
 	docker-compose run $(NAME) django-admin createsuperuser
