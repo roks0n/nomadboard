@@ -14,13 +14,13 @@ Including another URLconf
     2. Import the include() function: from django.conf.urls import url, include
     3. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
+from django.conf.settings import DEBUG, MEDIA_ROOT, MEDIA_URL
 from django.conf.urls import url
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.views import defaults as default_views
 
 from nomadboard.nomadboard.job.views import JobBoard, JobFilter
-from nomadboard.settings import DEBUG, MEDIA_ROOT, MEDIA_URL
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
