@@ -16,19 +16,19 @@ class Command(BaseCommand):
     help = 'Fetch feed(s) and update nomadboard.'
 
     def add_arguments(self, parser):
-        parser.add_argument('--source_id',
+        parser.add_argument('--source_ids',
                             default=None,
                             help=('You must specify an id of the source you want to fetch and'
                                   'update otherwise we will update all sources.'))
 
     def handle(self, *args, **options):
-        source_id = options['source_id']
+        source_ids = options['source_ids']
 
         # start BackgroundScheduler and add an interval job that gets ran every 30 minutes
         scheduler = BackgroundScheduler()
         scheduler.start()
         scheduler.add_job(self.job, 'interval', id='scraper', minutes=30,
-                          kwargs={'source_id': source_id})
+                          kwargs={'source_ids': source_ids})
 
         try:
             # this keeps the thread alive
@@ -38,16 +38,15 @@ class Command(BaseCommand):
             scheduler.shutdown()
 
     @staticmethod
-    def job(source_id):
+    def job(source_ids):
         """
         A scraper job that scrapes the feed
 
         """
-        if source_id:
-            for source in source_id.split(','):
-                try:
-                    src = Source.objects.get(pk=int(source))
-                except Source.DoesNotExist:
-                    src = None
-                if src:
-                    scrape(src)
+        filters = {}
+        if source_ids:
+            sources = source_ids.split(',')
+            filters['pk__in'] = sources
+
+        for source in Source.objects.filter(**filters):
+            scrape(source)
