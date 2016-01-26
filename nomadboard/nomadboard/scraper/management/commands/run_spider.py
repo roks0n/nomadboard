@@ -1,11 +1,12 @@
+# -*- coding: utf-8 -*-
 from time import sleep
 
 from apscheduler.schedulers.background import BackgroundScheduler
 
 from django.core.management.base import BaseCommand
 
-from nomadboard.nomadboard.scraper.models import Source
-from nomadboard.nomadboard.scraper.scrapers.weworkremotely import scrape
+from nomadboard.nomadboard.scraper import api
+from nomadboard.nomadboard.scraper.models import Scraper
 
 
 class Command(BaseCommand):
@@ -16,19 +17,18 @@ class Command(BaseCommand):
     help = 'Fetch feed(s) and update nomadboard.'
 
     def add_arguments(self, parser):
-        parser.add_argument('--source_ids',
+        parser.add_argument('--scraper_slug',
                             default=None,
-                            help=('You must specify an id of the source you want to fetch and'
-                                  'update otherwise we will update all sources.'))
+                            help=('Specify a slug of the Scraper you want to fetch data from'))
 
     def handle(self, *args, **options):
-        source_ids = options['source_ids']
+        scraper_slug = options['scraper_slug']
 
         # start BackgroundScheduler and add an interval job that gets ran every 30 minutes
         scheduler = BackgroundScheduler()
         scheduler.start()
         scheduler.add_job(self.job, 'interval', id='scraper', minutes=30,
-                          kwargs={'source_ids': source_ids})
+                          kwargs={'scraper_slug': scraper_slug})
 
         try:
             # this keeps the thread alive
@@ -38,15 +38,16 @@ class Command(BaseCommand):
             scheduler.shutdown()
 
     @staticmethod
-    def job(source_ids):
+    def job(scraper_slug):
         """
         A scraper job that scrapes the feed
 
         """
-        filters = {}
-        if source_ids:
-            sources = source_ids.split(',')
-            filters['pk__in'] = sources
 
-        for source in Source.objects.filter(**filters):
-            scrape(source)
+        if not scraper_slug:
+            raise ValueError
+
+        scraper = Scraper.objects.get(slug=scraper_slug)
+        spider_cls = api.get_spider(scraper.slug)
+        spider = spider_cls()
+        spider.start()
