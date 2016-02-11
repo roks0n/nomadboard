@@ -24,26 +24,6 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         scraper_slug = options['scraper_slug']
 
-        # start BackgroundScheduler and add an interval job that gets ran every 30 minutes
-        scheduler = BackgroundScheduler()
-        scheduler.start()
-        scheduler.add_job(self.job, 'interval', id='scraper', minutes=30,
-                          kwargs={'scraper_slug': scraper_slug})
-
-        try:
-            # this keeps the thread alive
-            while True:
-                sleep(1)
-        except (KeyboardInterrupt, SystemExit):
-            scheduler.shutdown()
-
-    @staticmethod
-    def job(scraper_slug):
-        """
-        A scraper job that scrapes the feed
-
-        """
-
         if not scraper_slug:
             raise ValueError
 

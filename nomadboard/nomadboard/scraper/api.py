@@ -95,16 +95,20 @@ def _create_job(scraper, company, job_data):
 
     """
 
-    job, created_job = Job.objects.update_or_create(
-        company=company,
-        link=job_data['link'],
-        via_source=scraper,
-        defaults={
-            'role': job_data['role'],
-            'date_published': job_data['date_published'],
-            'description': job_data['description'],
-        }
-    )
+    try:
+        job, created_job = Job.objects.update_or_create(
+            company=company,
+            link=job_data['link'],
+            via_source=scraper,
+            defaults={
+                'role': job_data['role'],
+                'date_published': job_data['date_published'],
+                'description': job_data['description'],
+            }
+        )
+    except:
+        # TODO: add logging here to see what sort of errors we get
+        return None
 
     if created_job:
         tag, _ = Tag.objects.get_or_create(name=job_data['source_category'])
@@ -124,7 +128,7 @@ def _create_job(scraper, company, job_data):
 
 def _walk_modules(path):
     """
-    Loads a module and all its submodulesfrom the given module path
+    Loads a module and all its submodules from the given module path
 
     :param path: module path
     :returns: list of modules
