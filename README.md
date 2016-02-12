@@ -28,6 +28,3 @@
 1. Run server in production
 `make run-production`
 
-2. Start Scheduler
-`nohup make django DJANGO_CMD='process_xml --source_id="1,2" >> scheduler.log`
-

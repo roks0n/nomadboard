@@ -1,8 +1,4 @@
 # -*- coding: utf-8 -*-
-from time import sleep
-
-from apscheduler.schedulers.background import BackgroundScheduler
-
 from django.core.management.base import BaseCommand
 
 from nomadboard.nomadboard.scraper import api
