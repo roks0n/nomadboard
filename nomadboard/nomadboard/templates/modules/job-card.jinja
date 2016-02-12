@@ -20,7 +20,9 @@
 
             <ul class="job-card__tags" itemprop="skills">
                 {% for tag in job.tags.all() %}
-                    <a href="{{ tag.get_absolute_url() }}"><li class="job-card__tags__tag">{{ tag }}</li></a>
+                    <a href="{{ tag.get_absolute_url() }}">
+                        <li class="job-card__tags__tag">{{ tag|replace('-', ' ') }}</li>
+                    </a>
                 {% endfor %}
             </ul>
         </div>

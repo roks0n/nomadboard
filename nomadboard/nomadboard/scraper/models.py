@@ -35,7 +35,7 @@ class Source(models.Model):
     url = models.CharField(max_length=300, unique=True)
     category = models.CharField(choices=constants.CATEGORIES,
                                 default=constants.CATEGORY_PROGRAMMING,
-                                blank=True, max_length=11)
+                                blank=True, max_length=50)
 
     def __str__(self):
         return self.url

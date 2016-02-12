@@ -17,7 +17,10 @@ class WeWorkRemotely(Spider):
         'https://weworkremotely.com/categories/6-devops-sysadmin/jobs.rss',
         'https://weworkremotely.com/categories/9-marketing/jobs.rss',
         'https://weworkremotely.com/categories/1-design/jobs.rss',
-        'https://weworkremotely.com/categories/2-programming/jobs.rss'
+        'https://weworkremotely.com/categories/2-programming/jobs.rss',
+        'https://weworkremotely.com/categories/7-customer-support/jobs.rss',
+        'https://weworkremotely.com/categories/3-business-exec-management/jobs.rss',
+        'https://weworkremotely.com/categories/5-copywriting/jobs.rss',
     ]
 
     def _get_category(self, url):
@@ -34,6 +37,12 @@ class WeWorkRemotely(Spider):
             return constants.CATEGORY_DESIGN
         elif '2-programming' in url:
             return constants.CATEGORY_PROGRAMMING
+        elif '7-customer-support' in url:
+            return constants.CATEGORY_CS
+        elif '3-business-exec-management' in url:
+            return constants.CATEGORY_EXEC
+        elif '5-copywriting' in url:
+            return constants.CATEGORY_COPYWRITING
 
         raise ValueError("Can't find a valid category")
 
