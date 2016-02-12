@@ -24,7 +24,7 @@
         <h2 class="jobs__search_title">
             Remote
             {% if tag_slug %}
-                <span class="jobs__search_title--term">{{ tag_slug }}</span>
+                <span class="jobs__search_title--term">{{ tag_slug|replace('-', ' ') }}</span>
             {% endif %}
             jobs
         </h2>
