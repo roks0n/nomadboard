@@ -6,7 +6,7 @@ from django.views.generic.base import TemplateView
 from nomadboard.nomadboard.job.models import Job, Tag
 from nomadboard.nomadboard.utils import pagination
 
-JOBS_PER_PAGE = 6
+JOBS_PER_PAGE = 18
 
 
 class JobBoard(TemplateView):
